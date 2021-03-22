@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="assets/reg.css">
+</head>
+
+<body>
+    <form action="" class="container" name="contact_form">
+        <h1 class="container__title">Регистрация</h1>
+        <input type="text" class="container__in" placeholder="Имя" id="fname">
+        <input type="text" class="container__in" placeholder="Фамилия" id="lname">
+        <input type="password" class="container__in" placeholder="Придумайте пароль" id="password">
+        <input type="text" class="container__in" placeholder="Адрес электронной почты" id="email">
+        <input type="text" class="container__in" placeholder="Номер мобильного телефона" id="tel">
+        <hr>
+        <div id="error"></div>
+
+        <button type="button" class="container__button" onclick="check()" id="button">Зарегистрироваться</button>
+
+        <p class="container__sing">Нажимая кнопку "Зарегистрироваться":</p>
+        <div class="container__checkbox">
+            <input type="checkbox" id="checkbox" value="check" checked />
+            <div class="container__checkbox_text">
+                Я принимаю условия
+                <a href="" class="container__checkbox_text-link">Пользовательского соглашения</a>
+                и даю своё согласие Яндексу на обработку моей персональной информации на условиях, определенных
+                <a href="" class="container__checkbox_text-link">Политикой конфиденциальности</a>.
+            </div>
+        </div>
+    </form>
+    <script src="/assets/reg.js"></script>
+</body>
+
+</html>

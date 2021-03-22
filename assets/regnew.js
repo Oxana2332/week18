@@ -47,10 +47,14 @@ function checkValidity(input) {
 
 function checkTel() {
 	let telFormat = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+	
+	if (tel.value!==""){
+		return true
+	}
 	if (tel.value.match(telFormat)) {
 		return true
 	} else {
-		errors.push('Неверный формат заполнения поля ' + input.placeholder)
+		errors.push('Номер телефона введен неверно');
 		return false
 	}
 }

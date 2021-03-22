@@ -47,15 +47,14 @@ function checkValidity(input) {
 
 function checkTel() {
 	let telFormat = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
-	
-	if (tel.value!==""){
-		return true
+	if (tel.value == "") {
+		return true;
 	}
 	if (tel.value.match(telFormat)) {
-		return true
+		return true;
 	} else {
 		errors.push('Номер телефона введен неверно');
-		return false
+		return false;
 	}
 }
 
@@ -70,8 +69,7 @@ function checkAll() {
 		checkValidity(input);
 	}
 
-	checkTel()
+	checkTel();
 	//выводим ошибки в div 
 	document.getElementById('errorsInfo').innerHTML = errors.join(',<br>');
 }
-

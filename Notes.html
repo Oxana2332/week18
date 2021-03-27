@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Локальное хранилище заметок</title>
+    <style>
+        body {
+            background-image: url(https://img.freepik.com/free-vector/white-abstract-background-in-3d-paper-style_23-2148403778.jpg?size=626&ext=jpg&ga=GA1.2.2095726712.1604880000);
+            background-size: 100%;
+        }
+
+        .cont {
+            display: inline;
+        }
+
+        .button {
+            background-color: rgb(137, 215, 247);
+            background-repeat: no-repeat;
+            width: 10%;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <article class="cont">
+        <h1>What to remember?</h1>
+        <p>Название заметки:
+            <input type="text" id="newname"></p>
+            <p>Текст заметки:
+                <textarea rows="3" cols="200" id="newNotes"></textarea></p>
+            <button class="button" onclick="addNotes()">Сохранить</button>
+        
+        <div id="Notes"></div>
+    </article>
+    <script>
+        //массив
+        let notess = []; //новые заметки
+        let Allnotes = []; //все заметки
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            let note = localStorage.getItem('note'); //хр заметок
+            let name = localStorage.getItem('name');
+            if (note != null)
+                Allnotes = JSON.parse(note);
+            if (Allnotes.length >
+                0) { //если в хранилище уже есть что-то, то всё это выводится поочередно в <div id="comments">
+                for (let c of Allnotes) {
+                    document.getElementById("Notes").innerHTML += c;
+                }
+            }
+        });
+
+        // новые комментарии добавляются в массив новых комментариев и проходят проверку на спам
+        function addNotes() {
+            let text = document.getElementById("newNotes").value;
+            notess.push(text);
+            checkSpam();
+        }
+
+        function checkSpam() { //проверка на спам
+            let optionsString = '';
+            let nName = document.getElementById('newname').value;
+            let now = new Date();
+            for (i = 0; i < notess.length; i++) {
+                let checknotes = notess[i].replace(/ххх|xxx|viagra/gi,
+                    "***"); //перебирается массив новых комм, проверяется на совпадения со спамом и заменяет его ***
+                optionsString =
+                    `<div><br><span style ="color:  rgb(137, 215, 247);     
+            font-size: large;">${nName}<br></span>${checknotes}<p style="color: grey;
+            font-size: small;">${now}</p><hr></div>`; //формирую строку Имя + проверенный на спам коммент
+            }
+            Allnotes.push(optionsString); //в хранилище комментариев добавляем сформированную выше строку
+            if (localStorage.getItem('name') == null) {
+                localStorage.setItem('name', nName); //если хранилище имени пусто, то добавляем туда введенное имя
+            }
+            localStorage.setItem('note', JSON.stringify(
+                Allnotes)); //в хранилище добавляется сформированная строка
+            document.getElementById("Notes").innerHTML +=
+                optionsString; //в див добавляется сформированная строка, которая и есть новая запись Имя+комм
+        }
+    </script>
+
+</body>
+
+</html>
